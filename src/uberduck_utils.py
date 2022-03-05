@@ -5,5 +5,5 @@ sponge = my_duck.get_voice('rick-sanchez', "Hey everyone I'm alive")
 
 # if the request went through
 if sponge:
-    # sponge.play_voice()
+    sponge.play_voice()
     sponge.save('spongebob.wav')
