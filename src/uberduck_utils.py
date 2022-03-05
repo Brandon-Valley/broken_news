@@ -6,5 +6,7 @@ sponge = my_duck.get_voice('fish-head', "Breaking news! Hey everyone I'm alive")
 
 # if the request went through
 if sponge:
-    sponge.play_voice()
+    # sponge.play_voice()
     sponge.save('fish.wav')
+    
+    
