@@ -15,8 +15,12 @@
 5. Install VLC: https://www.videolan.org/
     * This is for playing test .wav files, Windows defaulted to Grove Music for me which made the files sound really distorted and made me think something was wrong.
 
+6. `pip install opencv-python`
+
 
 https://github.com/DanielSWolf/rhubarb-lip-sync
 https://github.com/DanielSWolf/rhubarb-lip-sync/releases
 
 "C:\bv\s\Rhubarb-Lip-Sync-1.11.0-Windows\rhubarb.exe" -o C:\bv\p\broken_news\src\output.json "C:\bv\p\broken_news\src\fish.wav" -f json
+
+
