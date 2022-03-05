@@ -21,6 +21,12 @@
 https://github.com/DanielSWolf/rhubarb-lip-sync
 https://github.com/DanielSWolf/rhubarb-lip-sync/releases
 
-"C:\bv\s\Rhubarb-Lip-Sync-1.11.0-Windows\rhubarb.exe" -o C:\bv\p\broken_news\src\output.json "C:\bv\p\broken_news\src\fish.wav" -f json
+"C:\bv\s\Rhubarb-Lip-Sync-1.11.0-Windows\rhubarb.exe" -o C:\bv\p\broken_news\src\output.dat "C:\bv\p\broken_news\src\fish.wav" -f dat --datFrameRate 60 --datUsePrestonBlair
+
+https://stackoverflow.com/questions/66329596/cv2-create-video-from-array-of-images-with-specific-time
+
+https://www.spriters-resource.com/pc_computer/spongebobsquarepantsbattleforbikinibottomrehydrated/sheet/137089/
+
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fcartoonhalloffame.fandom.com%2Fwiki%2FRealistic_Fish_Head&psig=AOvVaw3XiVrsxdeF6GJoy7jDS2de&ust=1646608585565000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDOs6eNsPYCFQAAAAAdAAAAABAJ
 
 
