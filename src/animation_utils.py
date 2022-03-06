@@ -8,7 +8,9 @@ from sms.logger import txt_logger
 
 SCRIPT_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(__file__))
 IMGS_DIR_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
-MOUTH_SHAPE_DAT_FILE_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
+RUN_DIR_PATH  = os.path.abspath(os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'run'))
+NO_AUDIO_VID_PATH         = os.path.join(RUN_DIR_PATH, 'no_audio_vid.avi')
+MOUTH_SHAPE_DAT_FILE_PATH = os.path.join(RUN_DIR_PATH, 'mouth_shapes.dat')
 
 MOUTH_SHAPE_IMG_PATH_D = {
                             'MBP'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_a.png')),
@@ -107,6 +109,24 @@ def add_audio_to_vid(in_vid_no_audio_path, in_audio_path, out_vid_w_audio_path, 
     output = ffmpeg.output(video, audio, out_vid_w_audio_path, vcodec='copy', acodec='aac', strict='experimental')
     ffmpeg.run(output, overwrite_output = True)
     
+
+def write_vid_from_voice_clip(in_voice_file_path, fps, out_vid_path):
+    # NO_AUDIO_VID_PATH
+    print('Writing mouth shape dat file: ', MOUTH_SHAPE_DAT_FILE_PATH)
+    write_mouth_shape_dat_file(in_voice_file_path, MOUTH_SHAPE_DAT_FILE_PATH, fps)
+    
+    print('Getting mouth_shape_of_each_frame_l from date file: ', MOUTH_SHAPE_DAT_FILE_PATH)
+    mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(MOUTH_SHAPE_DAT_FILE_PATH)
+    print(mouth_shape_of_each_frame_l)
+    
+    print("Writing NO AUDIO vid to: ", NO_AUDIO_VID_PATH)
+    write_vid_no_audio(mouth_shape_of_each_frame_l, in_voice_file_path, fps, NO_AUDIO_VID_PATH)
+    
+    print('Adding Audio...')
+    add_audio_to_vid(NO_AUDIO_VID_PATH, in_voice_file_path, out_vid_path, fps)
+    
+    
+    
     
     
 if __name__ == "__main__":
@@ -118,12 +138,15 @@ if __name__ == "__main__":
     out_vid_no_audio_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid_no_audio.avi')
     out_vid_w_audio_path    = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid_final.avi')
     
-    # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
-    mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
-    print(mouth_shape_of_each_frame_l)
+    # # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
+    # mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
+    # print(mouth_shape_of_each_frame_l)
+    #
+    # write_vid_no_audio(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_no_audio_path)
+    #
+    # add_audio_to_vid(out_vid_no_audio_path, in_voice_file_path, out_vid_w_audio_path, fps)
     
-    write_vid_no_audio(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_no_audio_path)
     
-    add_audio_to_vid(out_vid_no_audio_path, in_voice_file_path, out_vid_w_audio_path, fps)
+    write_vid_from_voice_clip(in_voice_file_path, fps, out_vid_w_audio_path)
 
     print('done')
