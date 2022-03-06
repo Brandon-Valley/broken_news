@@ -10,15 +10,15 @@ IMGS_DIR_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
 MOUTH_SHAPE_DAT_FILE_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
 
 MOUTH_SHAPE_IMG_PATH_D = {
-                            'MBP'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_a.png')),
-                            'ETC'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_b.png')),
-                            'E'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_c.png')),
-                            'AI'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_d.png')),
-                            'O'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_e.png')),
-                            'U'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_f.png')),
-                            'FV'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_g.png')),
-                            'L'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_h.png')),
-                            'REST' : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_x.png'))
+                            'MBP'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_a.png')),
+                            'ETC'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_b.png')),
+                            'E'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_c.png')),
+                            'AI'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_d.png')),
+                            'O'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_e.png')),
+                            'U'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_f.png')),
+                            'FV'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_g.png')),
+                            'L'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_h.png')),
+                            'REST' : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_x.png'))
                          }
 
 
