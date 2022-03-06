@@ -53,7 +53,7 @@ def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
     mouth_shape_frame_dl = []
     
     # ignore 1st line
-    for line in line_l[1:-1]:
+    for line in line_l[1:]:
         frame_num_str, mouth_shape_str = line.split(' ')
         
         mouth_shape_frame_dl.append(
@@ -63,6 +63,7 @@ def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
                                         }
         
                                     )
+    print(mouth_shape_frame_dl)
         
         
     # build mouth_shape_of_each_frame_l
@@ -71,7 +72,7 @@ def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
         if dl_num != len(mouth_shape_frame_dl) - 1:
             next_dl = mouth_shape_frame_dl[dl_num + 1]
             num_cur_mouth_shape_frames = next_dl['frame_num'] - dl['frame_num']
-            print('num_cur_mouth_shape_frames: ', num_cur_mouth_shape_frames)
+            # print('num_cur_mouth_shape_frames: ', num_cur_mouth_shape_frames)
             
             for x in range(num_cur_mouth_shape_frames):
                 mouth_shape_of_each_frame_l.append(dl['mouth_shape'])
@@ -105,7 +106,7 @@ if __name__ == "__main__":
     
     # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
     mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
-    # print(mouth_shape_of_each_frame_l)
+    print(mouth_shape_of_each_frame_l)
     
     write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path)
 
