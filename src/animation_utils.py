@@ -105,14 +105,14 @@ def add_audio_to_vid(in_vid_no_audio_path, in_audio_path, out_vid_w_audio_path, 
     video  = ffmpeg.input(in_vid_no_audio_path).video # get only video channel
     audio  = ffmpeg.input(in_audio_path).audio # get only audio channel
     output = ffmpeg.output(video, audio, out_vid_w_audio_path, vcodec='copy', acodec='aac', strict='experimental')
-    ffmpeg.run(output)
+    ffmpeg.run(output, overwrite_output = True)
     
     
     
 if __name__ == "__main__":
     print('start')
     
-    in_voice_file_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish.wav')
+    in_voice_file_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish.mp4')
     out_dat_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'mouth_shapes.dat')
     fps = 24
     out_vid_no_audio_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid_no_audio.avi')
