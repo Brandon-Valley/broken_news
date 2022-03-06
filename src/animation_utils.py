@@ -44,7 +44,7 @@ def write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps):
     cmd = 'rhubarb -o {} {} -f dat --datFrameRate {} --datUsePrestonBlair'.format(out_dat_path, in_voice_file_path, fps)
     subprocess.call(cmd)
     
-def get_mouth_shape_frame_dl_from_dat_file(in_dat_path):
+def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
     print('Creating mouth_shape_frame_dl from ', in_dat_path)
     line_l = txt_logger.read(in_dat_path)
     # print(line_l)
@@ -60,23 +60,44 @@ def get_mouth_shape_frame_dl_from_dat_file(in_dat_path):
                                             'frame_num'  : int(frame_num_str),
                                             'mouth_shape': mouth_shape_str.upper()
                                         }
-            
+        
                                     )
-    return mouth_shape_frame_dl
+        
+        
+    # build mouth_shape_of_each_frame_l
+    mouth_shape_of_each_frame_l = []
+    for dl_num, dl in enumerate(mouth_shape_frame_dl):
+        if dl_num != len(mouth_shape_frame_dl) - 1:
+            next_dl = mouth_shape_frame_dl[dl_num + 1]
+            num_cur_mouth_shape_frames = next_dl['frame_num'] - dl['frame_num']
+            print('num_cur_mouth_shape_frames: ', num_cur_mouth_shape_frames)
+            
+            for x in range(num_cur_mouth_shape_frames):
+                mouth_shape_of_each_frame_l.append(dl['mouth_shape'])
+        
+        
+    return mouth_shape_of_each_frame_l
 
-def animate_fish_head_test():  
-    # write_mouth_shape_dat_file()
+def write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path):  
+    # build frame_l
+    frame_l = []
+    
+    
     pass
     
     
 if __name__ == "__main__":
     print('start')
-    # animate_fish_head_test()
+    
     in_voice_file_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish.wav')
     out_dat_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'mouth_shapes.dat')
     fps = 24
+    out_vid_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid.avi')
+    
     # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
-    mouth_shape_frame_dl = get_mouth_shape_frame_dl_from_dat_file(out_dat_path)
-    print(mouth_shape_frame_dl)
+    mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
+    print(mouth_shape_of_each_frame_l)
+    
+    write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path)
 
     print('done')
