@@ -14,14 +14,15 @@
     * Will need to restart any IDE you are using for env var update to be recognized
 5. Install VLC: https://www.videolan.org/
     * This is for playing test .wav files, Windows defaulted to Grove Music for me which made the files sound really distorted and made me think something was wrong.
-
 6. `pip install opencv-python`
+7. Download rhubarb: https://github.com/DanielSWolf/rhubarb-lip-sync/releases
+    * Then add the dir to your PATH env var
 
 
 https://github.com/DanielSWolf/rhubarb-lip-sync
 https://github.com/DanielSWolf/rhubarb-lip-sync/releases
 
-"C:\bv\s\Rhubarb-Lip-Sync-1.11.0-Windows\rhubarb.exe" -o C:\bv\p\broken_news\src\output.dat "C:\bv\p\broken_news\src\fish.wav" -f dat --datFrameRate 60 --datUsePrestonBlair
+rhubarb -o C:\bv\p\broken_news\src\output.dat "C:\bv\p\broken_news\src\fish.wav" -f dat --datFrameRate 60 --datUsePrestonBlair
 
 https://stackoverflow.com/questions/66329596/cv2-create-video-from-array-of-images-with-specific-time
 
