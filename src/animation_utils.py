@@ -1,6 +1,7 @@
 import cv2
 import os
 import subprocess
+import ffmpeg
 
 # from sms.txt_logger import txt_logger
 from sms.logger import txt_logger
@@ -80,7 +81,7 @@ def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
         
     return mouth_shape_of_each_frame_l
 
-def write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path):  
+def write_vid_no_audio(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path):  
     # build frame_l
     frame_l = []
     for mouth_shape_key in mouth_shape_of_each_frame_l:
@@ -94,6 +95,18 @@ def write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path
     out.release()
     
     
+def add_audio_to_vid(in_vid_no_audio_path, in_audio_path, out_vid_w_audio_path, fps):
+#     pass
+# def test_ffmpeg(video_path, audio_path, output_path='output-ffmpeg.mp4', fps=24):
+    
+
+    print('--- ffmpeg ---')
+
+    video  = ffmpeg.input(in_vid_no_audio_path).video # get only video channel
+    audio  = ffmpeg.input(in_audio_path).audio # get only audio channel
+    output = ffmpeg.output(video, audio, out_vid_w_audio_path, vcodec='copy', acodec='aac', strict='experimental')
+    ffmpeg.run(output)
+    
     
     
 if __name__ == "__main__":
@@ -102,12 +115,15 @@ if __name__ == "__main__":
     in_voice_file_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish.wav')
     out_dat_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'mouth_shapes.dat')
     fps = 24
-    out_vid_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid.avi')
+    out_vid_no_audio_path = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid_no_audio.avi')
+    out_vid_w_audio_path    = os.path.join(SCRIPT_PARENT_DIR_PATH, 'fish_vid_final.avi')
     
     # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
     mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
     print(mouth_shape_of_each_frame_l)
     
-    write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path)
+    write_vid_no_audio(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_no_audio_path)
+    
+    add_audio_to_vid(out_vid_no_audio_path, in_voice_file_path, out_vid_w_audio_path, fps)
 
     print('done')

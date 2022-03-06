@@ -149,3 +149,7 @@ imgs/ignore/
 src/fish_vid.avi
 
 src/mouth_shapes.dat
+
+src/fish_vid_final.avi
+
+*.avi
