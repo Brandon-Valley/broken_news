@@ -9,16 +9,17 @@ SCRIPT_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(__file__))
 IMGS_DIR_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
 MOUTH_SHAPE_DAT_FILE_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
 
-MOUTH_SHAPE_IMG_FILE_PATH_MBP  = os.path.join(IMGS_DIR_PATH, 'test_a.png')
-MOUTH_SHAPE_IMG_FILE_PATH_ETC  = os.path.join(IMGS_DIR_PATH, 'test_b.png')
-MOUTH_SHAPE_IMG_FILE_PATH_E    = os.path.join(IMGS_DIR_PATH, 'test_c.png')
-MOUTH_SHAPE_IMG_FILE_PATH_AI   = os.path.join(IMGS_DIR_PATH, 'test_d.png')
-MOUTH_SHAPE_IMG_FILE_PATH_O    = os.path.join(IMGS_DIR_PATH, 'test_e.png')
-MOUTH_SHAPE_IMG_FILE_PATH_U    = os.path.join(IMGS_DIR_PATH, 'test_f.png')
-MOUTH_SHAPE_IMG_FILE_PATH_FV   = os.path.join(IMGS_DIR_PATH, 'test_g.png')
-MOUTH_SHAPE_IMG_FILE_PATH_L    = os.path.join(IMGS_DIR_PATH, 'test_h.png')
-MOUTH_SHAPE_IMG_FILE_PATH_REST = os.path.join(IMGS_DIR_PATH, 'test_x.png')
-
+MOUTH_SHAPE_IMG_PATH_D = {
+                            'MBP'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_a.png')),
+                            'ETC'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_b.png')),
+                            'E'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_c.png')),
+                            'AI'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_d.png')),
+                            'O'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_e.png')),
+                            'U'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_f.png')),
+                            'FV'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_g.png')),
+                            'L'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_h.png')),
+                            'REST' : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'test_x.png'))
+                         }
 
 
 def test0():
@@ -81,9 +82,17 @@ def get_mouth_shape_of_each_frame_l_from_dat_file(in_dat_path):
 def write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path):  
     # build frame_l
     frame_l = []
+    for mouth_shape_key in mouth_shape_of_each_frame_l:
+        mouth_shape_img_path = MOUTH_SHAPE_IMG_PATH_D[mouth_shape_key]
+        frame_l.append(cv2.imread(mouth_shape_img_path))
+        
+    # print(frame_l)
+    height, width, _ = frame_l[0].shape
+    out = cv2.VideoWriter(out_vid_path, cv2.VideoWriter_fourcc(*'DIVX'), fps, (width, height))
+    [out.write(f) for f in frame_l]
+    out.release()
     
     
-    pass
     
     
 if __name__ == "__main__":
@@ -96,7 +105,7 @@ if __name__ == "__main__":
     
     # write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps)
     mouth_shape_of_each_frame_l = get_mouth_shape_of_each_frame_l_from_dat_file(out_dat_path)
-    print(mouth_shape_of_each_frame_l)
+    # print(mouth_shape_of_each_frame_l)
     
     write_vid(mouth_shape_of_each_frame_l, in_voice_file_path, fps, out_vid_path)
 
