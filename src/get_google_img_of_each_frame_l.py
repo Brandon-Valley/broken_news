@@ -14,7 +14,8 @@ def get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_
         response = google_images_download.googleimagesdownload()   #class instantiation
         
         args = {
-                 "keywords"        : keywords_str,
+                 # "keywords"        : keywords_str,
+                 "keywords"        : keywords_str.replace(' ', '+'),
                  "limit"           : num_imgs,
                  "image_directory" : img_dl_dir_path,
                  "print_urls"      : print_urls
@@ -25,6 +26,7 @@ def get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_
         # print(paths)   #printing absolute paths of the downloaded images
 
     
+    print('num_frames: ', num_frames)
     voice_clip_num_sec = num_frames / fps
     print('  Calculated length of voice_clip_num_sec to be # sec: ', voice_clip_num_sec)
     
@@ -41,8 +43,16 @@ def get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_
     
 if __name__ == '__main__':
     print('in main')
-    import main
-    main.main()
-    
+    # import main
+    # main.main()
+    #
+
+    num_frames = 310
+    fps = 24
+    script_str = "Breaking news! Russian customs officials said they had detained a star American basketball player after finding hashish oil in her luggage at an airport near Moscow. The Russian news agency has identified the player as Brittney Griner."
+    num_google_imgs_per_sec = 0.5
+
+    get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_per_sec)
+
     
     print('done')
