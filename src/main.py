@@ -11,7 +11,8 @@ FINAL_VID_PATH         = os.path.join(RUN_DIR_PATH, 'final_vid.avi')
 
 if __name__ == "__main__":
     
-    script_str = "Breaking news! Russian customs officials said they had detained a star American basketball player after finding hashish oil in her luggage at an airport near Moscow. The Russian news agency has identified the player as Brittney Griner."
+    # script_str = "Breaking news! Russian customs officials said they had detained a star American basketball player after finding hashish oil in her luggage at an airport near Moscow. The Russian news agency has identified the player as Brittney Griner."
+    script_str = "Breaking news! Russian customs officials said they had detained"
     voice_name_str = 'fish-head'
     fps = 24
     
