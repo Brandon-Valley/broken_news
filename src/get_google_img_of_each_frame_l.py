@@ -46,13 +46,23 @@ if __name__ == '__main__':
     # import main
     # main.main()
     #
+    #
+    # num_frames = 310
+    # fps = 24
+    # # script_str = "Breaking news! Russian customs officials said they had detained a star American basketball player after finding hashish oil in her luggage at an airport near Moscow. The Russian news agency has identified the player as Brittney Griner."
+    # # script_str = "Breaking,news,Russian,customs"
+    # script_str = "Polar bears,baloons,Beaches"
+    # num_google_imgs_per_sec = 0.5
+    #
+    # get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_per_sec)
+    
+    from google_images_download import google_images_download   #importing the library
 
-    num_frames = 310
-    fps = 24
-    script_str = "Breaking news! Russian customs officials said they had detained a star American basketball player after finding hashish oil in her luggage at an airport near Moscow. The Russian news agency has identified the player as Brittney Griner."
-    num_google_imgs_per_sec = 0.5
-
-    get_google_img_of_each_frame_l(num_frames, fps, script_str, num_google_imgs_per_sec)
+    response = google_images_download.googleimagesdownload()   #class instantiation
+    
+    arguments = {"keywords":"Polar bears,baloons,Beaches","limit":20,"print_urls":True}   #creating list of arguments
+    paths = response.download(arguments)   #passing the arguments to the function
+    print(paths)   #printing absolute paths of the downloaded images
 
     
     print('done')
