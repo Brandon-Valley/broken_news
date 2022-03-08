@@ -8,41 +8,24 @@ from sms.logger import txt_logger
 
 SCRIPT_PARENT_DIR_PATH = os.path.abspath(os.path.dirname(__file__))
 IMGS_DIR_PATH = os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'imgs')
+MOUTH_SHAPE_IMGS_DIR_PATH = os.path.join(IMGS_DIR_PATH, 'mouth_shape_imgs')
+
 RUN_DIR_PATH  = os.path.abspath(os.path.join(SCRIPT_PARENT_DIR_PATH, '..', 'run'))
 NO_AUDIO_VID_PATH         = os.path.join(RUN_DIR_PATH, 'no_audio_vid.avi')
 MOUTH_SHAPE_DAT_FILE_PATH = os.path.join(RUN_DIR_PATH, 'mouth_shapes.dat')
 
 MOUTH_SHAPE_IMG_PATH_D = {
-                            'MBP'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_a.png')),
-                            'ETC'  : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_b.png')),
-                            'E'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_c.png')),
-                            'AI'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_d.png')),
-                            'O'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_e.png')),
-                            'U'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_f.png')),
-                            'FV'   : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_g.png')),
-                            'L'    : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_h.png')),
-                            'REST' : os.path.abspath(os.path.join(IMGS_DIR_PATH, 'ignore/test_x.png'))
+                            'MBP'  : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_a.png')),
+                            'ETC'  : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_b.png')),
+                            'E'    : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_c.png')),
+                            'AI'   : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_d.png')),
+                            'O'    : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_e.png')),
+                            'U'    : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_f.png')),
+                            'FV'   : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_g.png')),
+                            'L'    : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_h.png')),
+                            'REST' : os.path.abspath(os.path.join(MOUTH_SHAPE_IMGS_DIR_PATH, 'test_x.png'))
                          }
-
-
-def test0():
-    FRAME_1_FILE_PATH = os.path.join(IMGS_DIR_PATH, 't1.png')
-    FRAME_2_FILE_PATH = os.path.join(IMGS_DIR_PATH, 't1_bw.png')
-    
-    
-    frames = [cv2.imread(FRAME_1_FILE_PATH),
-              cv2.imread(FRAME_2_FILE_PATH),
-              cv2.imread(FRAME_1_FILE_PATH),
-              cv2.imread(FRAME_2_FILE_PATH),
-              cv2.imread(FRAME_1_FILE_PATH)
-             ]
-    
-    fps = 1
-    height, width, _ = frames[0].shape
-    out = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'DIVX'), fps, (width, height))
-    [out.write(f) for f in frames]
-    out.release()
-    
+   
     
 def write_mouth_shape_dat_file(in_voice_file_path, out_dat_path, fps):
     cmd = 'rhubarb -o {} {} -f dat --datFrameRate {} --datUsePrestonBlair'.format(out_dat_path, in_voice_file_path, fps)
